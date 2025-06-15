@@ -12,12 +12,26 @@ public class Bullet : MonoBehaviour
     /// </summary>
     [SerializeField]
     private float lifeTime = 5f;
-    
+
     /// <summary>
     /// 弾が当たった時の音声ファイル
     /// </summary>
     [SerializeField]
     private AudioClip hitAudioClip;
+
+    /// <summary>
+    /// 弾丸の速度
+    /// </summary>
+    [SerializeField]
+    private float bulletSpeed = 1f;
+
+    /// <summary>
+    /// 外部から弾の速度を取得するプロパティ
+    /// </summary>
+    public float GetBulletSpeed
+    {
+        get { return bulletSpeed; }
+    }
 
     private void Start()
     {
@@ -27,7 +41,6 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         // 衝突位置と表面の法線ベクトル
         ContactPoint contact = collision.contacts[0];
         // ヒットエフェクトを生成

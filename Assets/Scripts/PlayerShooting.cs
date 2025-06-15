@@ -10,10 +10,7 @@ public class PlayerShooting : MonoBehaviour
     /// 弾丸のプレハブ
     /// </summary>
     public GameObject bulletPrefab;
-    /// <summary>
-    /// 弾丸の速度
-    /// </summary>
-    private float bulletSpeed = 1f;
+
     /// <summary>
     /// 弾丸の発射位置
     /// </summary>
@@ -41,9 +38,15 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI bulletText;
 
+    /// <summary>
+    /// メインカメラ
+    /// </summary>
+    private Camera mainCamera;
+
     private void Start()
     {
         bulletText.text = $"{maxBullets}/{maxBullets}";
+        mainCamera = Camera.main;
     }
 
     public void OnAttack(InputValue value)
@@ -61,10 +64,8 @@ public class PlayerShooting : MonoBehaviour
             return;
         }
 
-
-
         // 見えない光線をプレイヤーの画面中央から発射する
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
         // 撃ちたいターゲットに何があるかを事前に取得する
         if (Physics.Raycast(ray, out RaycastHit hit, 20f))
         {
@@ -77,9 +78,11 @@ public class PlayerShooting : MonoBehaviour
       shootPoint.rotation // 生成する角度
       );
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
+        // 弾の初速はBulletクラスから取得する
+        float bulletSpeed = bullet.GetComponent<Bullet>().GetBulletSpeed;
         // 力を加える
         bulletRigidbody.AddForce(
-            Camera.main.transform.forward * bulletSpeed,
+           mainCamera.transform.forward * bulletSpeed,
             ForceMode.Impulse);
         // 撃った弾丸数を増やす
         bulletsFired++;
