@@ -55,6 +55,12 @@ public class Bullet : MonoBehaviour
         // 音声ファイルを再生、自動で削除される
         AudioSource.PlayClipAtPoint(hitAudioClip, contact.point);
 
+        // 当たった相手からHealthクラスを取得しに行って、あればout healthに返す
+        if (collision.gameObject.TryGetComponent<Health>(out Health health))
+        {
+            health.TakeDamage(1);
+        }
+
         Destroy(gameObject);
     }
 }
