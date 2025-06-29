@@ -14,6 +14,8 @@ public class PlayerHealth : Health
         if (IsDead())
         {
             Debug.Log("プレイヤーの死亡");
+            // Scene上からFPSGameManagerを見つけてGameOverメソッドを発火させる
+            FindAnyObjectByType<FPSGameManager>().GameOver();
         }
     }
 }

@@ -12,9 +12,25 @@ public class Health : MonoBehaviour
     private int maxHealthPoint = 5;
 
     /// <summary>
+    /// 体力の最大値を取得するプロパティ
+    /// </summary>
+    public int GetMaxHealthPoint
+    {
+        get { return maxHealthPoint; }
+    }
+
+    /// <summary>
     /// 現在の体力値
     /// </summary>
     private int currentHealthPoint;
+    
+    /// <summary>
+    /// 現在の体力値を取得するプロパティ
+    /// </summary>
+    public int GetCurrentHealthPoint
+    {
+        get { return currentHealthPoint; }
+    }
 
     /// <summary>
     /// protected:自分自身と継承した子クラスからアクセスできる
