@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e765d282399e84780b0e659c81034b, type: 3}
+  m_Name: Rifle_1
+  m_EditorClassIdentifier: 
+  WeaponPrefab: {fileID: 8234187720039471603, guid: 3bb6afe5e04793c4982576dd12a1b9d4, type: 3}
+  BulletPrefab: {fileID: 1245318275560869632, guid: 6432ac1229c743b44963bbbb13c27b67, type: 3}
+  FireRate: 1
+  MaxAmmo: 10
+  ReloadTime: 1.5
