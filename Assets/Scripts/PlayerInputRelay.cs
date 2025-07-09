@@ -5,21 +5,25 @@ public class PlayerInputRelay : MonoBehaviour
 {
     [SerializeField]
     private WeaponSwitcher weaponSwitcher;
-
+   
     [SerializeField]
-    public InputActionAsset rightClickAction;
+    private PlayerAnimatorControl playerAnimatorControl;
 
-    private void Update()
+    public void OnAiming(InputValue value)
     {
-        if (rightClickAction.FindAction("Aiming").WasPerformedThisFrame())
+        if (value.isPressed)
         {
-            Debug.Log("Aiming");
-        }
-        if (rightClickAction.FindAction("Aiming").WasReleasedThisFrame())
-        {
-            Debug.Log("Aimingout");
+            playerAnimatorControl.IsAiming = true;
         }
     }
+    public void OnAimEnd(InputValue value)
+    {
+        if (!value.isPressed)
+        {
+            playerAnimatorControl.IsAiming = false;
+        }
+    }
+
     public void OnAttack(InputValue value)
     {
         if (value.isPressed)

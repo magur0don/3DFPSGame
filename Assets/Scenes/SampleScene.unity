@@ -1454,37 +1454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoint: 5
   DeathEffect: {fileID: 5705082655909554126, guid: 382ad7e7115f4944fa19a2033a65b7cc, type: 3}
---- !u!1 &1187597725
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1187597726}
-  m_Layer: 0
-  m_Name: ShootPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1187597726
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1187597725}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1454663006}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413014411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,7 +1726,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 520091361}
-  - {fileID: 1187597726}
   - {fileID: 872850347}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1873,6 +1841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 872850348}
   playerRigidbody: {fileID: 1454663008}
+  IsAiming: 0
 --- !u!114 &1454663014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1886,6 +1855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSwitcher: {fileID: 2056260392}
+  playerAnimatorControl: {fileID: 1454663013}
 --- !u!1 &1468099558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,6 +2048,7 @@ GameObject:
   - component: {fileID: 1711919563}
   - component: {fileID: 1711919562}
   - component: {fileID: 1711919566}
+  - component: {fileID: 1711919567}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2185,6 +2156,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHPImage: {fileID: 1413014413}
   playerHealth: {fileID: 1454663012}
+--- !u!114 &1711919567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711919561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b49b5f6fd3cbe74293e054b57a3e883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletText: {fileID: 187071980}
+  weaponSwitcher: {fileID: 2056260392}
 --- !u!1 &1727402019
 GameObject:
   m_ObjectHideFlags: 0
