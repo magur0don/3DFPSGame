@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Transform lookTransform;
 
+    public Transform Spine;
+
+    public Vector3 Offset;
+
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -43,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         // 前後、左右の移動入力に方向ベクトルを掛けて移動量を決定
         Vector3 move = forward * moveInput.y + right * moveInput.x;
         playerRigidbody.linearVelocity = move * moveSpeed;
+
     }
 
     public void OnMove(InputValue movementValue)
