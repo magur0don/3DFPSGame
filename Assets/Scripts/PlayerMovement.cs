@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -17,9 +18,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Transform lookTransform;
 
-    public Transform Spine;
+    [SerializeField]
+    private RotationConstraint rotationConstraint;
 
-    public Vector3 Offset;
+    [SerializeField]
+    private PlayerAnimatorControl playerAnimatorControl;
 
     private void Awake()
     {
@@ -32,6 +35,24 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // エイム中だったら
+        if (playerAnimatorControl.IsAiming)
+        {
+            rotationConstraint.rotationOffset = new Vector3(0, 60, 0);
+        }
+        else
+        {
+            if (rotationConstraint.rotationOffset != Vector3.zero)
+            {
+                  rotationConstraint.rotationOffset = Vector3.Lerp(
+                rotationConstraint.rotationOffset, 
+                Vector3.zero, 
+                Time.deltaTime * 5f // 5fは補間速度（調整可能）
+            );
+            }
+        }
+
+
         // 視点の前方向のベクトルと右方向のベクトルを取得
         Vector3 forward = lookTransform.forward;
         Vector3 right = lookTransform.right;
@@ -47,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
         // 前後、左右の移動入力に方向ベクトルを掛けて移動量を決定
         Vector3 move = forward * moveInput.y + right * moveInput.x;
         playerRigidbody.linearVelocity = move * moveSpeed;
+
+
 
     }
 

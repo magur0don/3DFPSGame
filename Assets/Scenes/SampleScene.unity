@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &83532875 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1981860918171908, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
-  m_PrefabInstance: {fileID: 872850346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &92900690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,15 +1382,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2056260391}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1981860918171908, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 872850349}
     - targetCorrespondingSourceObject: {fileID: 1805534705840986, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1651625011}
-    - targetCorrespondingSourceObject: {fileID: 1659409104826822, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1481671674}
   m_SourcePrefab: {fileID: 100100000, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
 --- !u!4 &872850347 stripped
 Transform:
@@ -1407,22 +1396,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 95565753606369354, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
   m_PrefabInstance: {fileID: 872850346}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &872850349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83532875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RigLayers:
-  - m_Rig: {fileID: 0}
-    m_Active: 1
-  m_Effectors: []
 --- !u!1 &1130339703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1892,8 +1865,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   lookTransform: {fileID: 1454663006}
-  Spine: {fileID: 0}
-  Offset: {x: 0, y: 0, z: 0}
+  rotationConstraint: {fileID: 1651625011}
+  playerAnimatorControl: {fileID: 1454663013}
 --- !u!114 &1454663011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2093,36 +2066,11 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: bd3f043f46534ba4aa1eb726ce6fb159, type: 2}
   m_BuildHeightMesh: 0
---- !u!1 &1481671672 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1659409104826822, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
-  m_PrefabInstance: {fileID: 872850346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1481671673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4900989096333568, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
   m_PrefabInstance: {fileID: 872850346}
   m_PrefabAsset: {fileID: 0}
---- !u!1818360609 &1481671674
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481671672}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_Active: 0
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 92900691}
-    weight: 1
 --- !u!4 &1622935962 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4140129689430690, guid: c266c61b42ce56a4ca7e9190ef1209e3, type: 3}
