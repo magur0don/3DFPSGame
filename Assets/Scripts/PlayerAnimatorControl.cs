@@ -15,6 +15,11 @@ public class PlayerAnimatorControl : MonoBehaviour
     /// </summary>
     public bool IsAiming = false;
 
+    public void SetReload(){ 
+        
+        playerAnimator.SetTrigger("Reload");
+        }
+
     private void FixedUpdate()
     {
         playerAnimator.SetBool("Aiming", IsAiming);

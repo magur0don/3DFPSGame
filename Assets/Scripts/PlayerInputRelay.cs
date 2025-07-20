@@ -38,6 +38,7 @@ public class PlayerInputRelay : MonoBehaviour
         if (value.isPressed)
         {
             weaponSwitcher.GetCurrentWeapon.Reload();
+            playerAnimatorControl.SetReload();
             Debug.Log("Reload");
         }
     }

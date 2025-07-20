@@ -39,11 +39,23 @@ public class Weapon : MonoBehaviour
     }
 
     /// <summary>
+    /// ‘Š’e”
+    /// </summary>
+    private int totalAmmo;
+
+    public int GetTotalAmmo
+    {
+        get { return totalAmmo; }
+    }
+
+    /// <summary>
     /// gameObject‚ªActive‚É‚È‚Á‚½‚Æ‚«‚É”­‰Î‚µ‚Ü‚·
     /// </summary>
     private void OnEnable()
     {
         currentAmmo = weaponData.MaxAmmo;
+        // ‘Š’e”‚ğ‰Šú‰»
+        totalAmmo = weaponData.MaxTotalAmmo;
     }
 
     public void Fire()
@@ -87,7 +99,24 @@ public class Weapon : MonoBehaviour
     {
         isReloading = true;
         yield return new WaitForSeconds(weaponData.ReloadTime);
-        currentAmmo = weaponData.MaxAmmo;
+
+        var needed = weaponData.MaxAmmo - currentAmmo;
+        var taken = Mathf.Min(needed, totalAmmo);
+        currentAmmo += taken;
+        totalAmmo -= taken;
         isReloading = false;
     }
+
+    /// <summary>
+    /// ŠO•”‚©‚ç’e”‚ğ•â[‚·‚é
+    /// </summary>
+    /// <param name="ammo">•â[‚³‚ê‚é’e”</param>
+    public void AddTotalAmmo(int ammo)
+    {
+        // Mathf.Min‚Í“ñ‚ÂˆÈã‚Ì’l‚©‚çÅ¬’l‚ğ•Ô‚µ‚Ä‚­‚ê‚Ü‚·
+        totalAmmo = Mathf.Min(totalAmmo+ammo,weaponData.MaxTotalAmmo);
+    }
+
+
+
 }
