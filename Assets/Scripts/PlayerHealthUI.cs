@@ -13,9 +13,13 @@ public class PlayerHealthUI : MonoBehaviour
     // で代入(playerHealth.CurrentHP/ playerHealth.MaxHp )
     private void Update()
     {
+        if (playerHealth == null)
+        {
+            return;
+        }
         // (変更したい型)変更される変数
         // のような書き方を"キャスト"と言って型を変更できます。
-        playerHPImage.fillAmount = 
-            (float)playerHealth.GetCurrentHealthPoint / playerHealth.GetMaxHealthPoint; 
+        playerHPImage.fillAmount =
+            (float)playerHealth.GetCurrentHealthPoint / playerHealth.GetMaxHealthPoint;
     }
 }

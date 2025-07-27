@@ -12,6 +12,10 @@ public class PlayerAmmoUI : MonoBehaviour
 
     void Update()
     {
+        if(weaponSwitcher == null){ 
+            return;
+            }
+
         bulletText.text = $"{weaponSwitcher.GetCurrentWeapon.GetCurrentAmmo}/{weaponSwitcher.GetCurrentWeapon.GetMaxAmmo}";
         totalMaxAmmoText.text = $"{weaponSwitcher.GetCurrentWeapon.GetTotalAmmo}";
     }

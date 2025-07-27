@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
-public class PlayerInputRelay : MonoBehaviour
+public class OnlinePlayerInputRelay : NetworkBehaviour
 {
     [SerializeField]
     private WeaponSwitcher weaponSwitcher;
@@ -12,6 +12,10 @@ public class PlayerInputRelay : MonoBehaviour
 
     public void OnAiming(InputValue value)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
 
         if (value.isPressed)
         {
@@ -20,6 +24,10 @@ public class PlayerInputRelay : MonoBehaviour
     }
     public void OnAimEnd(InputValue value)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         if (!value.isPressed)
         {
             playerAnimatorControl.IsAiming = false;
@@ -28,6 +36,10 @@ public class PlayerInputRelay : MonoBehaviour
 
     public void OnAttack(InputValue value)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         if (value.isPressed)
         {
             weaponSwitcher.GetCurrentWeapon.Fire();
@@ -36,6 +48,10 @@ public class PlayerInputRelay : MonoBehaviour
 
     public void OnReload(InputValue value)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         // inputActionsに設定されたReload（Rキーなど）が押されたら
         if (value.isPressed)
         {
@@ -47,6 +63,10 @@ public class PlayerInputRelay : MonoBehaviour
 
     public void OnWeaponSwitch(InputValue value)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         var inputValue = value.Get<Vector2>();
         if (inputValue.y > 0)
         {

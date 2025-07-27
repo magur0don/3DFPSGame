@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// ゲームの状態管理
@@ -11,12 +13,15 @@ public class FPSGameManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     private GameObject gameOverPanel;
-    
+
     [SerializeField]
     private ScoreUI scoreUI;
     // ①スコア用のint型の変数を用意してください。
     [SerializeField]
     private int gameScore = 0;
+
+    [SerializeField]
+    private NetworkManager networkManager;
 
     // ②スコア追加用のメソッドを作成してください。引数の値をスコア用の変数に追加
     public void AddScore(int addVal)
@@ -39,6 +44,11 @@ public class FPSGameManager : MonoBehaviour
         if (currentTargetNum <= 0)
         {
             GameOver();
+        }
+        // Cキーでクライアントモードで接続する
+        if (Keyboard.current.cKey.isPressed)
+        {
+            networkManager.StartClient();
         }
     }
 

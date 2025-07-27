@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class PlayerLook : MonoBehaviour
+using Unity.Netcode;
+public class OnlinePlayerLook : NetworkBehaviour
 {
     /// <summary>
     /// 上下回転用のCameraHolder
@@ -17,8 +17,20 @@ public class PlayerLook : MonoBehaviour
 
     private float pitch = 0f;
 
+    private void Start()
+    {
+        if(!IsOwner){ 
+            pitchTarget.gameObject.SetActive(false);
+            }
+    }
+
     public void OnLook(InputValue value)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         // プレイヤーの視点入力(x:横,y:縦)
         Vector2 look = value.Get<Vector2>();
 

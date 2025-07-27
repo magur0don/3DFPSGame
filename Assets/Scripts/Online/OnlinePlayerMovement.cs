@@ -1,14 +1,17 @@
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
+using Unity.Netcode.Components;
+
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour
+public class OnlinePlayerMovement : NetworkBehaviour
 {
     private Vector2 moveInput;
 
     public float moveSpeed = 5f;
 
-    private Rigidbody playerRigidbody;
+    private NetworkRigidbody playerRigidbody;
 
     /// <summary>
     /// プレイヤーが向いている方向の基準
@@ -25,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        playerRigidbody = GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<NetworkRigidbody>();
 
         // カーソルのモードを変更し、カーソル自体も非表示にします
         Cursor.lockState = CursorLockMode.Locked;
@@ -66,11 +69,15 @@ public class PlayerMovement : MonoBehaviour
 
         // 前後、左右の移動入力に方向ベクトルを掛けて移動量を決定
         Vector3 move = forward * moveInput.y + right * moveInput.x;
-        playerRigidbody.linearVelocity = (move * moveSpeed);
+        playerRigidbody.SetLinearVelocity(move * moveSpeed);
     }
 
     public void OnMove(InputValue movementValue)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         moveInput = movementValue.Get<Vector2>();
     }
 }
