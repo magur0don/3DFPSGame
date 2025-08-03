@@ -10,6 +10,21 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
     [SerializeField]
     private PlayerAnimatorControl playerAnimatorControl;
 
+    [SerializeField]
+    private PlayerHealth playerHealth;
+
+    private void Start()
+    {
+        if (!IsOwner)
+        {
+            return;
+        }
+        var playerAmmoUI = FindAnyObjectByType<PlayerAmmoUI>();
+        playerAmmoUI.SetWeaponSwitcher(weaponSwitcher);
+        var playerHealthUI = FindAnyObjectByType<PlayerHealthUI>();
+        playerHealthUI.SetPlayerHealth(playerHealth);
+    }
+
     public void OnAiming(InputValue value)
     {
         if (!IsOwner)
@@ -19,7 +34,7 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
 
         if (value.isPressed)
         {
-            playerAnimatorControl.IsAiming = true;
+            AimingServerRpc();
         }
     }
     public void OnAimEnd(InputValue value)
@@ -30,7 +45,7 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
         }
         if (!value.isPressed)
         {
-            playerAnimatorControl.IsAiming = false;
+            AimEndServerRpc();
         }
     }
 
@@ -42,7 +57,7 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
         }
         if (value.isPressed)
         {
-            weaponSwitcher.GetCurrentWeapon.Fire();
+            FireBulletServerRpc();
         }
     }
 
@@ -55,9 +70,7 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
         // inputActionsに設定されたReload（Rキーなど）が押されたら
         if (value.isPressed)
         {
-            weaponSwitcher.GetCurrentWeapon.Reload();
-            playerAnimatorControl.SetReload();
-            Debug.Log("Reload");
+            ReloadServerRpc();
         }
     }
 
@@ -70,12 +83,72 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
         var inputValue = value.Get<Vector2>();
         if (inputValue.y > 0)
         {
-            weaponSwitcher.Switch(1);
+            WeaponSwitchServerRpc(1);
         }
         else if (inputValue.y < 0)
         {
-            weaponSwitcher.Switch(-1);
+            WeaponSwitchServerRpc(-1);
         }
     }
 
+    [ServerRpc]
+    void FireBulletServerRpc()
+    {
+        FireBulletClientRpc();
+    }
+    [ClientRpc]
+    void FireBulletClientRpc()
+    {
+        weaponSwitcher.GetCurrentWeapon.Fire();
+    }
+
+    [ServerRpc]
+    void AimingServerRpc()
+    {
+        AimingClientRpc();
+    }
+
+    [ClientRpc]
+    void AimingClientRpc()
+    {
+        playerAnimatorControl.IsAiming = true;
+    }
+
+    [ServerRpc]
+    void AimEndServerRpc()
+    {
+        AimEndClientRpc();
+    }
+
+    [ClientRpc]
+    void AimEndClientRpc()
+    {
+        playerAnimatorControl.IsAiming = false;
+    }
+
+    [ServerRpc]
+    void ReloadServerRpc()
+    {
+        ReloadClientRpc();
+    }
+
+    [ClientRpc]
+    void ReloadClientRpc()
+    {
+        weaponSwitcher.GetCurrentWeapon.Reload();
+        playerAnimatorControl.SetReload();
+        Debug.Log("Reload");
+    }
+
+    [ServerRpc]
+    void WeaponSwitchServerRpc(int value)
+    {
+        WeaponSwitchClientRpc(value);
+    }
+
+    [ClientRpc]
+    void WeaponSwitchClientRpc(int value)
+    {
+        weaponSwitcher.Switch(value);
+    }
 }

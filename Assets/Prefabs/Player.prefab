@@ -288,6 +288,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   weaponSwitcher: {fileID: 7165923285901674998}
   playerAnimatorControl: {fileID: 8752410911196388506}
+  playerHealth: {fileID: 7535511074796540534}
 --- !u!114 &8752410911196388506
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,11 +10,17 @@ public class PlayerAmmoUI : MonoBehaviour
     [SerializeField]
     private WeaponSwitcher weaponSwitcher;
 
+    public void SetWeaponSwitcher(WeaponSwitcher weaponSwitcher)
+    {
+        this.weaponSwitcher = weaponSwitcher;
+    }
+
     void Update()
     {
-        if(weaponSwitcher == null){ 
+        if (weaponSwitcher == null)
+        {
             return;
-            }
+        }
 
         bulletText.text = $"{weaponSwitcher.GetCurrentWeapon.GetCurrentAmmo}/{weaponSwitcher.GetCurrentWeapon.GetMaxAmmo}";
         totalMaxAmmoText.text = $"{weaponSwitcher.GetCurrentWeapon.GetTotalAmmo}";

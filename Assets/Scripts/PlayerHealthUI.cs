@@ -9,6 +9,11 @@ public class PlayerHealthUI : MonoBehaviour
     [SerializeField]
     private PlayerHealth playerHealth;
 
+    public void SetPlayerHealth(PlayerHealth playerHealth)
+    {
+        this.playerHealth = playerHealth;
+    }
+
     // ‡BUpdate“à‚ÅAImage‚ÌfillAmount‚ğPlayerHealth‚Ì’l
     // ‚Å‘ã“ü(playerHealth.CurrentHP/ playerHealth.MaxHp )
     private void Update()
