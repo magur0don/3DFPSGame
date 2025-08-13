@@ -35,8 +35,18 @@ public class FPSGameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-        currentTargetNum =
+        if (networkManager == null)
+        {
+            currentTargetNum =
             FindObjectsByType<ScoreTargetHealth>(FindObjectsSortMode.None).Length;
+
+        }
+        else
+        {
+            currentTargetNum =
+       FindObjectsByType<NetworkScoreTarget>(FindObjectsSortMode.None).Length;
+
+        }
     }
 
     private void Update()
@@ -49,6 +59,10 @@ public class FPSGameManager : MonoBehaviour
         if (Keyboard.current.cKey.isPressed)
         {
             networkManager.StartClient();
+        }
+        if (Keyboard.current.hKey.isPressed)
+        {
+            networkManager.StartHost();
         }
     }
 

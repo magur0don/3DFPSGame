@@ -10,6 +10,13 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
     [SerializeField]
     private PlayerAnimatorControl playerAnimatorControl;
 
+    private void Start()
+    {
+        var playerAmmoUI = FindAnyObjectByType<PlayerAmmoUI>();
+        playerAmmoUI.SetWeaponSwitcher(weaponSwitcher);
+    }
+
+
     public void OnAiming(InputValue value)
     {
         if (!IsOwner)
@@ -19,7 +26,7 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
 
         if (value.isPressed)
         {
-            playerAnimatorControl.IsAiming = true;
+            IsAimingServerRpc();
         }
     }
     public void OnAimEnd(InputValue value)
@@ -30,7 +37,7 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
         }
         if (!value.isPressed)
         {
-            playerAnimatorControl.IsAiming = false;
+            IsAimEndServerRpc();
         }
     }
 
@@ -42,7 +49,7 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
         }
         if (value.isPressed)
         {
-            weaponSwitcher.GetCurrentWeapon.Fire();
+            FireBulletServerRpc();
         }
     }
 
@@ -78,4 +85,38 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
         }
     }
 
+    [ServerRpc]
+    void IsAimingServerRpc()
+    {
+        IsAimingClientRpc();
+    }
+
+    [ClientRpc]
+    void IsAimingClientRpc()
+    {
+        playerAnimatorControl.IsAiming = true;
+    }
+
+    [ServerRpc]
+    void IsAimEndServerRpc()
+    {
+        IsAimEndClientRpc();
+    }
+
+    [ClientRpc]
+    void IsAimEndClientRpc()
+    {
+        playerAnimatorControl.IsAiming = false;
+    }
+    [ServerRpc]
+    void FireBulletServerRpc()
+    {
+        FireBulletClientRpc();
+    }
+
+    [ClientRpc]
+    void FireBulletClientRpc()
+    {
+        weaponSwitcher.GetCurrentWeapon.Fire();
+    }
 }

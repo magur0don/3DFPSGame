@@ -34,7 +34,6 @@ public class OnlinePlayerMovement : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
     void FixedUpdate()
     {
         // ƒGƒCƒ€’†‚¾‚Á‚½‚ç

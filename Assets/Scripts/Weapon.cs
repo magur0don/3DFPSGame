@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.Netcode;
 
 public class Weapon : MonoBehaviour
 {
@@ -83,6 +84,13 @@ public class Weapon : MonoBehaviour
             );
         bullet.GetComponent<Rigidbody>().linearVelocity
             = shootPoint.forward * 30f;
+
+        var ownerNetObj = GetComponentInParent<NetworkObject>();
+        if (ownerNetObj != null) {
+
+            ulong shooterId = ownerNetObj ? ownerNetObj.OwnerClientId : 0UL;
+            bullet.GetComponent<Bullet>().ownerClientId = shooterId;
+        }
     }
 
     public void Reload()
