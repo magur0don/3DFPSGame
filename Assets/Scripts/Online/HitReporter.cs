@@ -25,7 +25,8 @@ public class HitReporter : NetworkBehaviour
 
         if (victimRef.TryGet(out NetworkObject no) && no != null)
         {
-            if (no.TryGetComponent<NetworkScoreTarget>(out var hn))
+            // Targetだけではなく、IServerDamageableを継承しているGameObjectを取得
+            if (no.TryGetComponent<IServerDamageable>(out var hn))
             {
                 hn.ApplyDamageServer(damage, OwnerClientId, hitPoint);
                 return;

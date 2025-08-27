@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
     /// <summary>
     /// Œ»İ‚Ì‘Ì—Í’l
     /// </summary>
+    [SerializeField]
     private int currentHealthPoint;
     
     /// <summary>

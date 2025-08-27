@@ -11,7 +11,7 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
     private PlayerAnimatorControl playerAnimatorControl;
 
     [SerializeField]
-    private PlayerHealth playerHealth;
+    private Health playerHealth;
 
     private void Start()
     {

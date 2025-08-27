@@ -94,12 +94,13 @@ GameObject:
   - component: {fileID: 4564553716657334446}
   - component: {fileID: 4508104095023203565}
   - component: {fileID: 2543263780765371087}
-  - component: {fileID: 7535511074796540534}
   - component: {fileID: 6751685315048745102}
   - component: {fileID: 8752410911196388506}
   - component: {fileID: 6684882606083041939}
   - component: {fileID: 5130879648105242923}
   - component: {fileID: -7288856136979561127}
+  - component: {fileID: -4389550408361090000}
+  - component: {fileID: 892397608038209282}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -261,19 +262,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   pitchTarget: {fileID: 9010174427469517595}
   mouseSensitivity: 100
---- !u!114 &7535511074796540534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4212956102075463777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552f8e2ee234e474180ef782351fbb9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealthPoint: 5
 --- !u!114 &6751685315048745102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +277,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   weaponSwitcher: {fileID: 7165923285901674998}
   playerAnimatorControl: {fileID: 8752410911196388506}
-  playerHealth: {fileID: 7535511074796540534}
+  playerHealth: {fileID: -4389550408361090000}
 --- !u!114 &8752410911196388506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +372,34 @@ MonoBehaviour:
   hittableMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-4389550408361090000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212956102075463777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb98c7c4d05fea4eb495d7347b390b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoint: 5
+--- !u!114 &892397608038209282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212956102075463777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33bf0252461e51f4db6025de27795574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  CurrentHP:
+    m_InternalValue: 0
 --- !u!1 &5166195959425371056
 GameObject:
   m_ObjectHideFlags: 0

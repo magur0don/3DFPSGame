@@ -7,9 +7,9 @@ public class PlayerHealthUI : MonoBehaviour
     private Image playerHPImage;
     // ‡APlayerHealth‚Ì•Ï”‚ğì¬B‚±‚ê‚àUnity‚©‚çİ’èB
     [SerializeField]
-    private PlayerHealth playerHealth;
+    private Health playerHealth;
 
-    public void SetPlayerHealth(PlayerHealth playerHealth)
+    public void SetPlayerHealth(Health playerHealth)
     {
         this.playerHealth = playerHealth;
     }

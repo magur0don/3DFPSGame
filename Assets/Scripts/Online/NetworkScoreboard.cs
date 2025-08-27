@@ -49,6 +49,10 @@ public class NetworkScoreboard : NetworkBehaviour
             }
             NetworkManager.OnClientConnectedCallback += OnClientConnected;
             NetworkManager.OnClientDisconnectCallback += OnClientDisconnected;
+            // 複数オブジェクト対応
+            RemainingTargets.Value = 
+                FindObjectsByType<NetworkScoreTarget>
+                (FindObjectsSortMode.None).Length;
         }
     }
     /// <summary>
@@ -149,6 +153,19 @@ public class NetworkScoreboard : NetworkBehaviour
         {
             EndGame();
         }
+    }
+
+    /// <summary>
+    /// ★ プレイヤー死亡通知（サーバ権威）。誰かが死んだらゲーム終了にする簡易ルール
+    /// </summary>
+    [ServerRpc(RequireOwnership = false)]
+    public void NotifyPlayerDiedServerRpc(ulong deadClientId)
+    {
+        if (!IsServer || State.Value == GameState.GameOver) return;
+
+        // 必要ならここでチーム数や生存者数を集計してから EndGame へ
+        Debug.Log($"[SV] Player {deadClientId} died -> GameOver");
+        EndGame();
     }
 
     /// <summary>
