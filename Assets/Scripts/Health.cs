@@ -43,6 +43,15 @@ public class Health : MonoBehaviour
     }
 
     /// <summary>
+    /// HPリセット用のメソッド
+    /// </summary>
+    public void ResetHealth()
+    {
+        currentHealthPoint = maxHealthPoint;
+    }
+
+
+    /// <summary>
     /// ダメージ処理
     /// </summary>
     /// <param name="damage">現在の体力値から引かれるダメージ</param>

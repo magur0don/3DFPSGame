@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealthUI : MonoBehaviour
@@ -9,6 +10,32 @@ public class PlayerHealthUI : MonoBehaviour
     [SerializeField]
     private Health playerHealth;
 
+    private OnlinePlayerHealth target;
+    public void Bind(OnlinePlayerHealth oph)
+    {
+        target = oph;
+        UpdateBar(target.CurrentHP.Value, target.GetComponent<Health>().GetMaxHealthPoint);
+
+        // š HP‚ª•Ï‚í‚Á‚½‚çŒÄ‚Î‚ê‚é
+        target.CurrentHP.OnValueChanged += OnHPChanged;
+    }
+    private void OnHPChanged(int prev, int curr)
+    {
+        int max = target.GetComponent<Health>().GetMaxHealthPoint;
+        UpdateBar(curr, max);
+    }
+
+    private void UpdateBar(int current, int max)
+    {
+        playerHPImage.fillAmount = (max > 0) ? (float)current / max : 0f;
+    }
+    void OnDestroy()
+    {
+        if (target != null)
+            target.CurrentHP.OnValueChanged -= OnHPChanged;
+    }
+
+
     public void SetPlayerHealth(Health playerHealth)
     {
         this.playerHealth = playerHealth;
@@ -18,6 +45,11 @@ public class PlayerHealthUI : MonoBehaviour
     // ‚Å‘ã“ü(playerHealth.CurrentHP/ playerHealth.MaxHp )
     private void Update()
     {
+        // Online—p‚ÌHealth‚ª“o˜^‚³‚ê‚Ä‚¢‚½ê‡‚Í‘Šúreturn
+        if (target) {
+
+            return;
+        }
         if (playerHealth == null)
         {
             return;

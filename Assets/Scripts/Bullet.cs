@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
     /// <summary>
     /// オンライン中に多重に処理が走らないようにする
     /// </summary>
-    private bool hitProcessed = false;       
+    private bool hitProcessed = false;
     private void Start()
     {
         // 一定時間後に自動削除（ローカル）
@@ -40,12 +40,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (hitProcessed) 
+        if (hitProcessed)
         {
             return;   // ★ 二度目以降は無視
         }
         hitProcessed = true;
-        
+
         // --- 見た目と音はローカルで再生 ---
         var contact = collision.contacts.Length > 0 ? collision.contacts[0] : default;
 
@@ -65,7 +65,6 @@ public class Bullet : MonoBehaviour
 
         if (isOnline)
         {
-
             // 親方向から NetworkObject（子コライダー対策）
             var no = collision.transform.GetComponentInParent<NetworkObject>();
 
@@ -75,15 +74,19 @@ public class Bullet : MonoBehaviour
 
             if (reporter != null)
             {
-                if (no != null && no.IsSpawned)
+                // ★ 自分が撃った弾だけ処理する
+                if (ownerClientId == NetworkManager.Singleton.LocalClientId)
                 {
-                    // ★ Spawn済みなら安全に直参照
-                    reporter.ReportDamageServerRpc(no, baseDamage, this.transform.position);
-                }
-                else
-                {
-                    // ★ デスポーン等で未Spawnなら座標フォールバック
-                    reporter.ReportDamageByHitPointServerRpc(this.transform.position, baseDamage, 0.35f);
+                    if (no != null && no.IsSpawned)
+                    {
+                        // ★ Spawn済みなら安全に直参照
+                        reporter.ReportDamageServerRpc(no, baseDamage, this.transform.position);
+                    }
+                    else
+                    {
+                        // ★ デスポーン等で未Spawnなら座標フォールバック
+                        reporter.ReportDamageByHitPointServerRpc(this.transform.position, baseDamage, 0.35f);
+                    }
                 }
             }
         }
@@ -92,6 +95,7 @@ public class Bullet : MonoBehaviour
             // オフライン（Netcode未使用）の場合は、従来どおりローカルで直接ダメージ
             if (collision.gameObject.TryGetComponent<Health>(out var health))
             {
+                Debug.Log("ここがきてる");
                 health.TakeDamage(baseDamage);
             }
         }

@@ -21,8 +21,14 @@ public class OnlinePlayerInputRelay : NetworkBehaviour
         }
         var playerAmmoUI = FindAnyObjectByType<PlayerAmmoUI>();
         playerAmmoUI.SetWeaponSwitcher(weaponSwitcher);
-        var playerHealthUI = FindAnyObjectByType<PlayerHealthUI>();
-        playerHealthUI.SetPlayerHealth(playerHealth);
+        // 
+        var healthUI = FindAnyObjectByType<PlayerHealthUI>();
+        if (healthUI)
+        {
+            var oph = GetComponent<OnlinePlayerHealth>();
+            healthUI.Bind(oph);
+        }
+
     }
 
     public void OnAiming(InputValue value)

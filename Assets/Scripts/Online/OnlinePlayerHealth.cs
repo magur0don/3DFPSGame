@@ -15,13 +15,16 @@ public class OnlinePlayerHealth : NetworkBehaviour, IServerDamageable
     bool deathHandled = false;
 
     void Awake() => health = GetComponent<Health>();
-
+    
     public override void OnNetworkSpawn()
     {
         if (IsServer)
         {
+            health.ResetHealth();
             CurrentHP.Value = health.GetCurrentHealthPoint; // 初期値同期
         }
+        GetComponentInChildren<WorldSpaceHPBar>().Init(this);
+
     }
 
     /// <summary>弾などから呼ばれるサーバ権威のダメージ入口</summary>
